@@ -1,4 +1,4 @@
-import { ADD_OP, SHOWSTATE } from './actions';
+import { ADD_OP } from './actions';
 
 const initialState = {
     operations: [],
@@ -6,16 +6,10 @@ const initialState = {
 
 const opReducer = ( state = initialState, action ) => {
     switch(action.type){
-        case SHOWSTATE: 
-            console.log(state);
-            console.log("reducer");
-            return {
-                ...state,
-            };
         case ADD_OP:
             return {
                 ...state,
-                operations: [...action.payload],
+                operations: [...state.operations, action.payload],
             };
         default: return {...state};
     };

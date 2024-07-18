@@ -12,15 +12,12 @@ export default function AddOp () {
             ...data,
             [e.target.name]: e.target.value
         });
-        // console.log(data);
     };
     const sending = e => {
-        console.log(data);
+        // console.log(data);
         dispatch(addOperation(data));
     };
     const showing = e => {
-        console.log("estado = ");
-        dispatch(showState());
         console.log(state);
     }
     return(
