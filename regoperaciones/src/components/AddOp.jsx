@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { showState, addOperation } from '../redux/actions'
 
 export default function AddOp () {
     const [ data, setData ] = useState({});
+    const dispatch = useDispatch();
+    const state = useSelector( state => state );
     const changing = e => {
         setData({
             ...data,
@@ -12,7 +16,13 @@ export default function AddOp () {
     };
     const sending = e => {
         console.log(data);
+        dispatch(addOperation(data));
     };
+    const showing = e => {
+        console.log("estado = ");
+        dispatch(showState());
+        console.log(state);
+    }
     return(
         <div>
             <label>Fecha</label>
@@ -28,6 +38,7 @@ export default function AddOp () {
             <input type="text" name="price" className="" onChange={changing}/>
             <br/>
             <Btn onClick={sending}>Agregar</Btn>
+            <Btn onClick={showing}>Estado</Btn>
         </div>
     );
 };
