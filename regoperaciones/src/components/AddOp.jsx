@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { showState, addOperation } from '../redux/actions'
+import { showState, addOperation } from '../redux/actionsOperations'
 
 export default function AddOp () {
-    const [ data, setData ] = useState({});
+    const initialData = {
+        date: "",
+        ticker: "",
+        amount: "",
+        price: "",
+        buy: "",
+    }
+    const [ data, setData ] = useState(initialData);
     const dispatch = useDispatch();
     const state = useSelector( state => state );
     const changing = e => {
@@ -16,26 +23,32 @@ export default function AddOp () {
     const sending = e => {
         // console.log(data);
         dispatch(addOperation(data));
+        setData(initialData);
     };
-    const showing = e => {
-        console.log(state);
-    }
     return(
         <div>
             <label>Fecha</label>
-            <input type="text" name="date" className="" onChange={changing}/>
+            <input type="text" name="date" value={data.date} 
+                className="" onChange={changing}/>
             <br/>
             <label>Ticker</label>
-            <input type="text" name="ticker" className="" onChange={changing}/>
+            <input type="text" name="ticker" value={data.ticker}
+                className="" onChange={changing}/>
             <br/>
             <label>Cantidad</label>
-            <input type="text" name="amount" className="" onChange={changing}/>
+            <input type="text" name="amount" value={data.amount}
+                className="" onChange={changing}/>
             <br/>
             <label>Precio</label>
-            <input type="text" name="price" className="" onChange={changing}/>
+            <input type="text" name="price" value={data.price}
+                className="" onChange={changing}/>
+            <br/>
+            <label>Compra o Venta</label>
+            <input type="text" name="buy" value={data.buy}
+                className="" onChange={changing}/>
             <br/>
             <Btn onClick={sending}>Agregar</Btn>
-            <Btn onClick={showing}>Estado</Btn>
+            <Btn onClick={()=> console.log(state)}>Estado</Btn>
         </div>
     );
 };
